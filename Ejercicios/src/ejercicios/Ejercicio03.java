@@ -6,6 +6,7 @@
 package ejercicios;
 
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 /**
  *
@@ -17,17 +18,35 @@ public class Ejercicio03 {
         Scanner entrada = new Scanner(System.in);
         double calificacion;
         String nombre;
-        
+
         int i = 1;
-        while(i<=4){
-            System.out.println("Ingrese calificación: \n");
-            calificacion = entrada.nextDouble();
-            System.out.println("Ingrese nombre: \n");
-            nombre = entrada.nextLine();
-            System.out.printf("Nombre: %s\n"
-                    + "Calificación: %.1f\n", 
-                    nombre, calificacion);
-            i = i + 1;
+        while (i <= 4) {
+            try {
+                System.out.println("Ingrese calificación: \n");
+                calificacion = entrada.nextDouble();
+                entrada.nextLine();
+                System.out.println("Ingrese nombre: \n");
+                nombre = entrada.nextLine();
+                if (calificacion < 0 || calificacion > 10) {
+                    throw new Exception("Dato fuera del rango permitido");
+                }
+
+                if (nombre.equals("Mario") || nombre.equals("Pedro")
+                        || nombre.equals("Ana") || nombre.equals("Luis")
+                        || nombre.equals("Carolina")) {
+                    throw new Exception("Nombre ingresado no válido");
+                }
+                System.out.printf("Nombre: %s\n"
+                        + "Calificación: %.1f\n",
+                        nombre, calificacion);
+                i = i + 1;
+            } catch (InputMismatchException e) {
+                System.out.printf("(InputMismatchException) Ocurrió una "
+                        + "excepción %s\n", e);
+                entrada.nextLine();
+            } catch (Exception e) {
+                System.out.printf("Ocurrió una excepción %s\n", e);
+            }
         }
 
         System.out.printf("%s\n", "Gracias por usar el sistema");
