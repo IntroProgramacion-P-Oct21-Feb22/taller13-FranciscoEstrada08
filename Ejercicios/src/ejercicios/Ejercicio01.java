@@ -34,7 +34,7 @@ public class Ejercicio01 {
 
             System.out.printf("%.2f\n", promedio);
         } catch (InputMismatchException e) {
-            System.out.printf("(InputMismatchException) Ocurrió una "
+            System.out.printff("(InputMismatchException) Ocurrió una "
                     + "excepción %s\n", e);
         }
     }
